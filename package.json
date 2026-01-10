@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:gh": "vite build --base /moniefest/",
+    "build:gh": "vite build --base /moniefest-comingsoon/",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
