@@ -105,10 +105,3 @@ git commit -m "chore: update site content and components"
 git push
 ```
 
-## Contact
-
-For questions about the project or deployment, contact the maintainer.
-
----
-
-*Generated README — adjust contact and deployment details as needed.*
