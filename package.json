@@ -8,6 +8,7 @@
     "build": "vite build",
     "build:gh": "vite build --base /moniefest-comingsoon/",
     "build:dev": "vite build --mode development",
+    "deploy": "npm run build:gh && gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview"
   },
