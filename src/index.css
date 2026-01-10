@@ -1,0 +1,869 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Font stacks */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    --font-headings: 'Poppins', 'Inter', ui-sans-serif, system-ui;
+    --background: 120 6% 4%; /* deep near-black green */
+    /* Primary readable text color (neutral, high contrast) */
+    --foreground: 0 0% 98%;
+
+    --card: 120 6% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 120 6% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Primary brand color (neon lime for headers, CTAs) */
+    --primary: 90 95% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 230 50% 15%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 120 7% 16%;
+    --muted-foreground: 120 6% 56%;
+
+    --accent: 85 90% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 120 6% 12%;
+    --input: 120 6% 12%;
+    --ring: 90 90% 48%;
+
+    --radius: 0.5rem;
+
+    /* Custom colors */
+    --hero-gradient-start: 120 12% 4%;
+    --hero-gradient-end: 120 10% 2%;
+    --navy: 120 6% 4%;
+    --navy-light: 120 8% 6%;
+    --blue: 200 10% 8%;
+    --blue-hover: 200 12% 6%;
+    --cta-start: 90 95% 60%;
+    --cta-end: 90 95% 36%;
+    /* Alternate CTA gradient (used for buttons across hero/footer/register) */
+    --button-start: 110 92% 48%; /* slightly greener, cooler tone */
+    --button-end: 85 95% 36%;  /* deeper lime end */
+
+    /* Accessible ring color for focus states (neon green) */
+    --ring: 90 90% 48%;
+
+    /* Typographic scale */
+    --text-base: 16px;
+    --text-sm: 14px;
+    --text-lg: 18px;
+    --h1: 2.25rem; /* 36px */
+    --h2: 1.75rem; /* 28px */
+    --h3: 1.25rem; /* 20px */
+
+    --sidebar-background: 120 6% 6%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 90 95% 44%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 90 95% 44%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 120 6% 8%;
+    --sidebar-ring: 90 90% 36%;
+  }
+
+  .dark {
+    --background: 230 30% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 230 50% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 230 50% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 90 95% 44%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 18%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 30% 20%;
+    --muted-foreground: 220 10% 70%;
+
+    --accent: 85 90% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 230 30% 25%;
+    --input: 230 30% 25%;
+    --ring: 90 90% 36%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background;
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-headings);
+    letter-spacing: -0.02em;
+    margin-top: 0;
+  }
+
+  h1 { font-size: var(--h1); line-height: 1.05; font-weight: 700; }
+  h2 { font-size: var(--h2); line-height: 1.08; font-weight: 700; }
+  h3 { font-size: var(--h3); line-height: 1.1; font-weight: 600; }
+
+  /* Improved focus styles for accessibility */
+  :focus {
+    outline: none;
+  }
+  :focus-visible {
+    box-shadow: 0 0 0 4px hsl(var(--ring) / 0.18);
+    border-radius: 6px;
+  }
+
+  /* skip-link removed per user request */
+
+  /* Accessible link styles: underline on hover/focus and visible focus ring */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  a:hover,
+  a:focus {
+    text-decoration: underline;
+  }
+  a:focus-visible {
+    box-shadow: 0 0 0 4px hsl(var(--ring) / 0.18);
+    border-radius: 6px;
+  }
+}
+
+@layer utilities {
+  .hero-gradient {
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-start)) 0%, hsl(var(--hero-gradient-end)) 60%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, hsl(90 95% 48%) 0%, hsl(100 95% 38%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-card {
+    background: hsl(var(--card) / 0.92);
+    backdrop-filter: blur(8px) saturate(120%);
+    border: 1px solid rgba(16,24,40,0.04);
+    box-shadow: 0 8px 24px rgba(11,15,30,0.06);
+    color: hsl(var(--foreground));
+  }
+
+  .section-dark {
+    background: linear-gradient(180deg, hsl(var(--hero-gradient-start)) 0%, hsl(var(--hero-gradient-end)) 100%);
+  }
+
+  .section-navy {
+    background: hsl(var(--navy));
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .plus-animate {
+    transform-origin: center;
+    animation: plusPop 2s ease-in-out infinite;
+  }
+
+  @keyframes plusPop {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.95;
+    }
+    50% {
+      transform: scale(1.12);
+      opacity: 1;
+    }
+  }
+
+  .logo-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Site section helpers */
+  .section-container {
+    max-width: 76rem; /* 1216px */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .section-title {
+    font-size: var(--h2);
+    line-height: 1.08;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: hsl(var(--foreground));
+  }
+
+  .stat-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.04);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+  }
+
+  .testimonial-quote {
+    color: hsl(var(--foreground));
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+
+  .card-accent {
+    position: relative;
+  }
+  .card-accent::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background: linear-gradient(180deg, hsl(var(--cta-start)) 0%, hsl(var(--cta-end)) 100%);
+  }
+
+  /* Reveal card used for About section: image + gradient overlay with a white content panel on hover/focus */
+  .reveal-card {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 260px;
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+  .reveal-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* blue overlay for a more professional, cohesive brand feel */
+    background: linear-gradient(180deg, rgba(10,40,120,0.55) 0%, rgba(30,80,200,0.55) 100%);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+  }
+  .reveal-card .reveal-title {
+    position: absolute;
+    left: 1.25rem;
+    top: 1.25rem;
+    z-index: 12;
+    color: #ffffff;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    font-size: 1rem;
+    line-height: 1;
+    text-shadow: 0 2px 8px rgba(6,8,15,0.45);
+  }
+  .reveal-panel {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    bottom: 1rem;
+    z-index: 11;
+    width: calc(60% - 2rem);
+    max-width: 520px;
+    background: rgba(255,255,255,0.98);
+    padding: 1.25rem 1.25rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(11,15,30,0.06);
+    opacity: 0;
+    transform: translateX(-8px) translateY(6px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    color: hsl(var(--foreground));
+  }
+  .group:hover .reveal-panel,
+  .group:focus-within .reveal-panel {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+  /* dark panel title that appears when panel is visible */
+  .reveal-panel .reveal-title-dark {
+    color: hsl(var(--foreground));
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .group:hover .reveal-panel .reveal-title-dark,
+  .group:focus-within .reveal-panel .reveal-title-dark {
+    opacity: 1;
+  }
+  /* hide the white title when panel is visible */
+  .group:hover .reveal-title,
+  .group:focus-within .reveal-title {
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+  .reveal-card:focus,
+  .reveal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(11,15,30,0.08);
+  }
+  @media (max-width: 768px) {
+    .reveal-panel { width: calc(100% - 2.5rem); left: 1rem; top: 3.5rem; }
+  }
+
+  /* Hero responsive improvements */
+  .hero-section {
+    min-height: 55vh;
+    padding-top: 3rem;
+    padding-bottom: 2.25rem;
+  }
+  @media (min-width: 640px) {
+    .hero-section { min-height: 60vh; padding-top: 5rem; padding-bottom: 3rem; }
+  }
+  @media (min-width: 1024px) {
+    .hero-section { min-height: 70vh; padding-top: 6rem; padding-bottom: 4rem; }
+  }
+
+  /* Make glass-card more compact and elevated on mobile for a polished card look */
+  .glass-card {
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  @media (max-width: 640px) {
+    .glass-card {
+      /* Mobile: keep transparent to match user preference, but add padding for tap targets */
+      background: transparent;
+      backdrop-filter: none;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: none;
+      border: none;
+    }
+    .hero-section .container { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .hero-section .container { text-align: left; }
+    .hero-section h1 { color: hsl(var(--secondary)); font-size: 1.9rem; line-height: 1.05; }
+    .hero-section p { font-size: 1.0625rem; }
+  }
+
+  /* Slight lift on hover for larger screens */
+  @media (min-width: 640px) {
+    .glass-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(11,15,30,0.12); }
+  }
+
+  /* Desktop hero card: solid white, left-aligned and wider */
+  @media (min-width: 1024px) {
+    .hero-section .container { max-width: 1200px; }
+    .hero-section .max-w-3xl { max-width: 900px; }
+    .hero-section .glass-card {
+      /* Fully transparent card on desktop — no background color */
+      background: transparent;
+      color: #ffffff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: none;
+      border: none;
+      width: 48%;
+      max-width: 720px;
+      margin-left: 3rem;
+    }
+    /* Improve text readability when sitting directly on the image */
+    .hero-section .glass-card h1 {
+      text-shadow: 0 6px 18px rgba(6,8,15,0.6);
+    }
+    .hero-section .glass-card p,
+    .hero-section .glass-card .text-foreground,
+    .hero-section .glass-card span {
+      text-shadow: 0 4px 14px rgba(6,8,15,0.45);
+    }
+    .hero-section h1 {
+      color: #ffffff;
+      font-size: 3.4rem;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+    }
+    .hero-section p { color: hsl(var(--foreground) / 0.9); font-size: 1.125rem; }
+    .hero-section .group { box-shadow: none; }
+  }
+
+  /* CTA pill for hero matching reference */
+  .cta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    /* Use standard symmetric padding for a neat pill layout */
+    padding: 0.55rem 1rem;
+    border-radius: 9999px;
+    border: 2px solid hsl(var(--button-start) / 0.92);
+    background: linear-gradient(90deg, hsl(var(--button-start)) 0%, hsl(var(--button-end)) 100%);
+    text-decoration: none;
+    transition: transform 0.14s ease, box-shadow 0.14s ease;
+  }
+  .cta-pill:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(11,15,30,0.12); filter: brightness(0.96); }
+    /* Label styling */
+    .cta-pill-label { padding-left: 0.25rem; padding-right: 0.25rem; display: inline-block; text-align: left; font-size: 1rem; color: #000000; }
+  .cta-pill-icon { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; }
+
+  /* Inline icon (no absolute positioning) so layout flows naturally and is easier to center on small screens */
+  .cta-pill .cta-pill-icon { position: static; margin-left: 0.25rem; }
+
+  /* Brand utilities */
+  .brand-green {
+    /* a decent green-tint filter for black/monochrome PNG logos */
+    filter: invert(48%) sepia(70%) saturate(560%) hue-rotate(80deg) brightness(95%) contrast(92%);
+  }
+
+  /* Use an image as a mask and fill it with the brand color for exact matching */
+  .logo-fill {
+    display: inline-block;
+    background-color: hsl(var(--primary));
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  /* Raster logo images that include multi-color elements (e.g. black tagline) */
+  .logo-img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Top nav background for high contrast and professional look */
+  .top-nav-bg {
+    background: linear-gradient(180deg, rgba(6,8,15,0.96), rgba(10,12,18,0.90));
+    box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .nav-link-contrast {
+    color: hsl(var(--foreground) / 0.95);
+    transition: color 160ms ease, transform 160ms ease;
+  }
+  .nav-link-contrast:hover,
+  .nav-link-contrast:focus {
+    color: hsl(var(--primary));
+    transform: translateY(-1px);
+  }
+
+  .register-btn-top {
+    background: linear-gradient(90deg, hsl(var(--button-start)) 0%, hsl(var(--button-end)) 100%);
+    color: #000000;
+    border-radius: 0.5rem;
+    padding: 0.55rem 0.9rem;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .register-btn-top:hover { filter: brightness(0.95); transform: translateY(-2px); }
+
+  /* Footer helpers */
+  .footer-panel {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.02);
+  }
+  .footer-card {
+    background: hsl(var(--card) / 0.04);
+    border-radius: 12px;
+    padding: 1rem;
+    min-height: 80px;
+    border: 1px solid hsl(var(--border) / 0.25);
+    /* keep hover visual depth but avoid movement */
+    .footer-box:hover {
+      box-shadow: 0 18px 36px rgba(4,6,12,0.36);
+    }
+    transition: color 160ms ease;
+    text-decoration: none;
+  }
+    .footer-link:hover { color: hsl(var(--primary)); }
+
+  /* Footer title style: slightly larger, bold, and brand green */
+  .footer-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: hsl(var(--primary));
+    letter-spacing: -0.01em;
+  }
+
+  /* Wireframe-like footer boxes (per user's reference image) */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* Clean professional footer layout */
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 200px 220px 300px 220px;
+    gap: 24px;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+  }
+
+  .footer-title {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: hsl(var(--primary));
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .footer-links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .footer-links a { color: hsl(var(--foreground) / 0.9); text-decoration: none; }
+  .footer-links a:hover { color: hsl(var(--primary)); }
+
+  .footer-socials {
+    display: flex;
+    gap: 2.25rem; /* increase space between Finance Lang and Monie columns */
+    align-items: flex-start;
+  }
+
+  /* Ticket column */
+  .ticket-col { display: flex; align-items: center; justify-content: flex-start; }
+
+  .ticket-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    background: linear-gradient(90deg, hsl(var(--button-start)) 0%, hsl(var(--button-end)) 100%);
+    color: hsl(var(--primary-foreground));
+    font-weight: 600;
+    box-shadow: 0 10px 28px rgba(16,185,129,0.12);
+    text-decoration: none;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+  }
+  .ticket-btn:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(16,185,129,0.14); filter: brightness(0.98); }
+
+  .ticket-icon {
+    display: inline-grid; place-items: center; width: 30px; height: 30px; background: rgba(255,255,255,0.12); border-radius: 8px; color: hsl(var(--primary-foreground));
+  }
+
+  .company-column { min-width: 0; }
+
+  .company-column .company-title { margin-bottom: 0.4rem; font-size: 0.95rem; color: hsl(var(--primary)); }
+
+  .company-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+  }
+
+  .company-list li { margin: 0; }
+
+  .company-list a { display: flex; align-items: center; gap: 0.5rem; color: hsl(var(--foreground) / 0.9); text-decoration: none; }
+
+  .social-icon { width: 18px; height: 18px; display: inline-block; vertical-align: middle; color: hsl(var(--foreground) / 0.92); }
+
+  .footer-link:hover .social-icon { color: hsl(var(--primary)); }
+
+  /* White square badge around social icons */
+  .social-badge {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: none;
+    flex-shrink: 0;
+  }
+
+  .social-badge svg { width: 16px; height: 16px; color: #111827; display: block; }
+
+  /* spacing: keep badge then label */
+  .company-list a { gap: 0.9rem; }
+
+  /* Force remove any browser list markers and padding so SVGs render inline */
+  .footer-links ul,
+  .company-list,
+  .company-list ul,
+  .footer-links ul li,
+  .company-list li {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  /* Prevent flex children (svg) from shrinking and ensure icons are visible */
+  .company-list svg.social-icon {
+    flex-shrink: 0;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+  }
+
+  /* If the site is missing the inline SVGS for some reason, hide default markers explicitly */
+  ul[role="list"], ul { list-style: none !important; }
+
+    /* Restore markers for intentional lists (Tailwind's `list-disc` etc.)
+      Global reset above removes markers; these rules re-enable markers where
+      the markup explicitly requests them. */
+    .list-disc { list-style-type: disc !important; }
+    .list-decimal { list-style-type: decimal !important; }
+    .list-inside { list-style-position: inside !important; }
+    .list-outside { list-style-position: outside !important; }
+
+  .footer-legal { margin-top: 1.25rem; color: hsl(var(--foreground) / 0.7); font-size: 0.9rem; }
+
+  .footer-box {
+    background: linear-gradient(180deg, hsl(var(--card) / 0.06), hsl(var(--card) / 0.03));
+    color: hsl(var(--foreground));
+    padding: 1rem;
+    border-radius: 8px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(4,6,12,0.28);
+    transition: box-shadow 220ms ease;
+  }
+
+  .footer-box:hover {
+    box-shadow: 0 20px 40px rgba(4,6,12,0.36);
+  }
+
+  .footer-small-box {
+    background: hsl(var(--card) / 0.045);
+    color: hsl(var(--foreground));
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0 6px 18px rgba(4,6,12,0.14);
+  }
+
+  /* Title text styling remains separate; keep small boxes neutral and use .footer-title for green text */
+
+  .footer-list-muted {
+    color: hsl(var(--foreground) / 0.92);
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .social-grid { grid-template-columns: 1fr; }
+  }
+
+  .cta-pill-icon.brand-bg {
+    background: linear-gradient(90deg, hsl(var(--button-start)) 0%, hsl(var(--button-end)) 100%);
+  }
+
+  /* Darker overlay on hero to make white text pop */
+  .hero-section > .absolute.inset-0.hero-gradient { opacity: 0.6; }
+  .hero-section > .absolute.inset-0.bg-black\/20 { background: linear-gradient(180deg, rgba(6,8,15,0.08), rgba(6,8,15,0.56)); }
+}
+
+/* Additional mobile adjustments to prevent heading overflow and improve CTA spacing */
+@media (max-width: 420px) {
+  .hero-section {
+    min-height: 52vh;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-section .logo-fill {
+    width: 500vw; /* larger logo on tiny screens */
+    max-width: 700px;
+    margin-left: 0; /* allow centering via container */
+  }
+
+  .hero-section h2 {
+    font-size: 1.5rem; /* larger heading for better presence */
+    line-height: 1.12;
+    text-wrap: balance;
+    word-break: break-word;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    text-align: center;
+  }
+
+  .cta-pill {
+    gap: 0.6rem;
+    padding: 0.6rem 0.9rem;
+    border-width: 1.2px;
+    font-size: 1rem;
+  }
+  .cta-pill-label { padding-left: 0.5rem; padding-right: 0.25rem; font-size: 1.02rem; color: #000000; }
+  .cta-pill-icon { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; }
+
+  /* Ensure hero content is centered and consumes available width on phones */
+  .hero-section .container { padding-left: 0.75rem; padding-right: 0.75rem; }
+  .hero-section .max-w-xl { max-width: 92% !important; }
+}
+
+/* Extra mobile safety: reduce heading sizes, make CTAs full-width, prevent horizontal scroll */
+@media (max-width: 480px) {
+  html, body { overflow-x: hidden; }
+
+  h1, h2, h3 { line-height: 1.08; }
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.15rem; }
+  h3 { font-size: 1rem; }
+
+  .section-container { padding-left: 0.75rem; padding-right: 0.75rem; }
+  .section-title { font-size: 1.05rem; }
+
+  /* Make CTA and ticket buttons expand to available width for easier tapping */
+  .cta-pill, .register-btn-top, .ticket-btn {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  /* Force hero details left-aligned and slightly larger on phones */
+  .hero-section .hero-detail {
+    text-align: left;
+    font-size: 1rem; /* ensure base size on very small screens */
+  }
+
+  .hero-section .hero-detail .text-lg { font-size: 1.0625rem; }
+
+  /* Override hero-specific CTA: center and make tappable full-width pill on phones */
+  .hero-section .cta-pill {
+    width: 92%;
+    max-width: 420px;
+    justify-content: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-shadow: 0 10px 30px rgba(4,6,12,0.16);
+    border-width: 0;
+  }
+
+  /* Make label centered and slightly larger for readability */
+  .hero-section .cta-pill .cta-pill-label {
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  /* Icon as a compact white circle to the right */
+  .hero-section .cta-pill .cta-pill-icon {
+    margin-left: 0.5rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+  }
+
+  /* Reduce footer grid complexity on phones */
+  .footer-inner { grid-template-columns: 1fr !important; gap: 1rem; }
+
+  /* Ensure image masks and logos don't overflow */
+  .logo-fill { max-width: 85%; height: auto; }
+
+  /* Reduce card paddings to tighten vertical rhythm */
+  .glass-card, .card-accent, .footer-card { padding: 0.75rem; }
+}
