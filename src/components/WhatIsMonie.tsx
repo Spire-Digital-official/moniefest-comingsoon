@@ -16,7 +16,14 @@ export default function WhatIsMonie() {
     <div className="py-8">
       <div className="max-w-3xl mx-auto">
         <article tabIndex={0} role="button" aria-label="ENGAGE, LEARN, AND CONNECT!" className="group relative rounded-xl overflow-hidden shadow-md hover:shadow-lg transition bg-card border border-border focus:outline-none">
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.62), rgba(0,0,0,0.62)), url(${heroBg})` }} />
+          <div
+            className="absolute inset-0 bg-cover bg-center sm:bg-left"
+            style={{
+              backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.62), rgba(0,0,0,0.62)), url(${heroBg})`,
+              backgroundPosition: 'left center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          />
           <div className="relative p-6 md:p-8">
             <div className="flex items-center gap-4">
               <div className="bg-primary/10 p-3 rounded-lg text-primary-foreground">

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, ArrowUpRight, Users, Calendar } from "lucide-react";
 import heroBg from "@/assets/banner_bg.jpeg";
-import monieHeader from "@/assets/monieHeader.png";
 
 type HeroProps = {
   onOpenEventbrite?: () => void;
@@ -25,7 +24,7 @@ const Hero = ({ onOpenEventbrite }: HeroProps) => {
           <div className="block w-full pr-0 sm:pr-8 md:pr-10 pl-0">
             <div className="flex justify-start mb-4">
               <img
-                src={monieHeader}
+                src={`${import.meta.env.BASE_URL}moniefest2026.svg`}
                 alt="Monie Fest 2026"
                 className="logo-img block max-w-full h-auto w-80 sm:w-96 md:w-[460px] lg:w-[800px] xl:w-[580px]"
               />
